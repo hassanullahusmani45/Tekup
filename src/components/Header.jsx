@@ -9,7 +9,6 @@ import { ArrowLeftEndOnRectangleIcon, ArrowLeftStartOnRectangleIcon, ChatBubbleO
 export default function Header() {
 
   const authContext = useContext(AuthContext);
-  console.log(authContext);
 
 
   return (

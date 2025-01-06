@@ -15,7 +15,7 @@ export default function Footer() {
           <Link to={"/"}>
             <img src={Logo} className="w-24 h-24 rounded-full" alt="logo" />
           </Link>
-          <div className="text-justify">
+          <div className="">
             The Lorem ipum filling text is used by graphic designers, programmers and printers with the aim of occupying the spaces of a website, an advertising product or an editorial production whose final text is not yet ready.
             This expedient serves to get an idea of the finished product that will soon be printed or disseminated via digital channels.
           </div>

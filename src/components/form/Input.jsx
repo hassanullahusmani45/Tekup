@@ -77,7 +77,7 @@ Input.propTypes = {
     type: PropTypes.string,
     placeholder: PropTypes.string,
     className: PropTypes.string,
-    validationes: PropTypes.arrayOf(PropTypes.func),
+    validationes: PropTypes.arrayOf(PropTypes.object).isRequired,
     onInputHandler: PropTypes.func.isRequired,
     id: PropTypes.string.isRequired,
 };

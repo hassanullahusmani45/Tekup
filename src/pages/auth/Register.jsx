@@ -7,8 +7,7 @@ import Button from '../../components/form/Button';
 import { required, min, max, email } from '../../validators/Rules';
 import { useForm } from '../../hooks/useForm';
 import AuthContext from '../../context/AuthContext';
-import axios from 'axios';
-// import axios from '../../api/axios';
+import axios from '../../api/axios';
 
 
 
@@ -17,7 +16,6 @@ export default function Register() {
 
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
-  console.log(authContext);
   
 
   const [formState, onInputHandler] = useForm({
@@ -44,15 +42,9 @@ export default function Register() {
       password: formState.inputs.password.value
     };
     axios.post(
-      'http://127.0.0.1:8000/api/register',
-      formInputs, // This is the request body (data)
-      {
-        headers: {
-          'Accept': 'application/json',
-        }
-      }
+      '/register',
+      formInputs,
     ).then(response => {
-      console.log(response.data);
       authContext.login(response.data.user_api_token, response.data.user);
       navigate('/');
     }).catch(error => {

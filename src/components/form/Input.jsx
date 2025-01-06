@@ -1,5 +1,6 @@
-import React, { useEffect, useReducer } from 'react'
+import { useEffect, useReducer } from 'react'
 import Validator from '../../validators/Validator';
+import PropTypes from 'prop-types';
 
 export default function Input(props) {
 
@@ -7,7 +8,7 @@ export default function Input(props) {
 
     const inputReducer = (state, action) => {
         switch (action.type) {
-            case "CHANG":
+            case "CHANG": {
                 const { validationResulte, errorMessage } = Validator(action.value, action.validationes);
                 return {
                     ...state,
@@ -15,6 +16,7 @@ export default function Input(props) {
                     errorMessage: errorMessage,
                     isValid: validationResulte
                 }
+            }
 
             default:
                 return state;
@@ -43,7 +45,7 @@ export default function Input(props) {
         )
     }
 
-    
+
 
     const element = props.element === "input" ? (
         <input
@@ -69,3 +71,13 @@ export default function Input(props) {
         </div>
     )
 }
+
+Input.propTypes = {
+    element: PropTypes.oneOf(['input', 'textarea']).isRequired,
+    type: PropTypes.string,
+    placeholder: PropTypes.string,
+    className: PropTypes.string,
+    validationes: PropTypes.arrayOf(PropTypes.func),
+    onInputHandler: PropTypes.func.isRequired,
+    id: PropTypes.string.isRequired,
+};

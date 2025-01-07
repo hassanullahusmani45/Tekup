@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
-import { AtSymbolIcon, ChatBubbleOvalLeftIcon, CommandLineIcon, DevicePhoneMobileIcon, LinkIcon, PaperClipIcon, PhoneIcon, RocketLaunchIcon, UsersIcon } from "@heroicons/react/24/outline";
+import { ChatBubbleOvalLeftIcon, CommandLineIcon, DevicePhoneMobileIcon, EnvelopeIcon, LinkIcon, PaperClipIcon, PhoneIcon, RocketLaunchIcon, UsersIcon } from "@heroicons/react/24/outline";
 
 
 import Logo from "../assets/images/logo-white.svg";
 
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="bg-slate-900 text-white px-6 py-5">
 
@@ -16,8 +18,7 @@ export default function Footer() {
             <img src={Logo} className="w-24 h-24 rounded-full" alt="logo" />
           </Link>
           <div className="">
-            The Lorem ipum filling text is used by graphic designers, programmers and printers with the aim of occupying the spaces of a website, an advertising product or an editorial production whose final text is not yet ready.
-            This expedient serves to get an idea of the finished product that will soon be printed or disseminated via digital channels.
+            Tekup is the best place for learning articles, offering insightful and high-quality content to help you stay ahead in technology and beyond. Whether you are a beginner or an expert, our articles are designed to inspire and educate, empowering you to expand your knowledge and skills.
           </div>
         </div>
 
@@ -36,10 +37,14 @@ export default function Footer() {
         <div className="col-span-1 text-left">
           <div className="flex gap-1 my-5"><RocketLaunchIcon className="size-6" />Support</div>
           <div className="text-sm leading-[2rem]">
-            <div className="flex items-center gap-1"><AtSymbolIcon className="size-5" /> hassanullahusmani45@gmail.com</div>
+            <div className="flex items-center gap-1"><EnvelopeIcon className="size-5" /> hassanullahusmani45@gmail.com</div>
             <div className="flex items-center gap-1"><DevicePhoneMobileIcon className="size-5" /> +93 772 181 609</div>
             <div className="flex items-center gap-1"><PhoneIcon className="size-5" /> 076 723 3172</div>
           </div>
+        </div>
+
+        <div className=" col-span-4 text-center border-t border-slate-600 py-4 mt-6">
+          Copyright &copy; {currentYear} Tekup Posts
         </div>
       </div>
 

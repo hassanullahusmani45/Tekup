@@ -1,4 +1,4 @@
-import React from 'react'
+import { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Logo from "../../assets/images/logo-white.svg"
 import Input from '../../components/form/Input'
@@ -6,10 +6,14 @@ import { useForm } from '../../hooks/useForm'
 import { EnvelopeIcon, LockClosedIcon } from '@heroicons/react/24/outline'
 import Button from '../../components/form/Button'
 import { required, min, max, email } from '../../validators/Rules'
+import AuthContext from '../../context/AuthContext'
+import axios from '../../api/axios'
+
 
 
 export default function Login() {
-
+  const authContext = useContext(AuthContext);
+  const [error, setError] = useState(null);
   const [formState, onInputHandler] = useForm({
     email: {
       value: "",
@@ -24,8 +28,22 @@ export default function Login() {
 
   const loginUser = (event) => {
     event.preventDefault();
-
-    alert("welcom back!");
+    const formInputs = {
+      email: formState.inputs.email.value,
+      password: formState.inputs.password.value
+    };
+    axios.post("/login", formInputs)
+      .then(response => {
+        if (response.data.error) {
+          setError(response.data.error);
+        } else {
+          setError(null);
+          authContext.login(response.data.user_api_token, response.data.user);
+        }
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
   }
 
   return (
@@ -37,6 +55,7 @@ export default function Login() {
           <img src={Logo} className="w-24 h-24 rounded-full" alt="logo" />
         </Link>
 
+        {error && <div className='text-red-500 text-start text-sm font-medium'>{error}</div>}
 
         <label htmlFor="email"
           className="block pl-2 mb-2 mt-4 font-medium text-white dark:text-gray-200">Email :</label>

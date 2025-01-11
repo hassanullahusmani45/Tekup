@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import Input from '../../components/form/Input'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Logo from "../../assets/images/logo-white.svg";
 import { EnvelopeIcon, LockClosedIcon, UserIcon } from '@heroicons/react/24/outline';
 import Button from '../../components/form/Button';
@@ -14,9 +14,8 @@ import axios from '../../api/axios';
 
 export default function Register() {
 
-  const navigate = useNavigate();
   const authContext = useContext(AuthContext);
-  
+
 
   const [formState, onInputHandler] = useForm({
     fullname: {
@@ -46,7 +45,6 @@ export default function Register() {
       formInputs,
     ).then(response => {
       authContext.login(response.data.user_api_token, response.data.user);
-      navigate('/');
     }).catch(error => {
       console.log(error.response);
     });

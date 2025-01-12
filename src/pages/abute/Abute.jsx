@@ -5,7 +5,8 @@ import profile from '../../assets/images/profile.jpg'
 import hassanProfile from '../../assets/images/hassan.JPG'
 import nasibjanProfile from '../../assets/images/nasibjan.jpg'
 import mohmmadProfile from '../../assets/images/mohmmad.jpg'
-import { EnvelopeIcon, GlobeEuropeAfricaIcon, PhoneIcon } from '@heroicons/react/24/outline'
+import { AcademicCapIcon, ClipboardDocumentListIcon, EnvelopeIcon, GlobeEuropeAfricaIcon, PhoneIcon, UsersIcon } from '@heroicons/react/24/outline'
+import LandingCounter from '../../components/LandingCounter'
 
 export default function Abute() {
 
@@ -25,7 +26,7 @@ export default function Abute() {
           </div>
         </div>
 
-        <div className='mt-28 text-center font-semibold text-lg'>Our Experienced Team</div>
+        <div className='mt-28 text-center font-semibold text-xl'>Our Experienced Team</div>
         <div className='w-1/4 mx-auto mt-4 border-t-2 border-dotted border-teal-300 ' ></div>
 
         <div className='grid grid-cols-4 gap-6 mt-16 pb-16'>
@@ -145,6 +146,34 @@ export default function Abute() {
             </div>
           </div>
 
+
+        </div>
+
+
+
+
+        <div className='mt-20 text-center font-semibold text-xl'>Surprise Information Abute Our Web Sit</div>
+        <div className='w-1/3 mx-auto mt-4 border-t-2 border-dotted border-teal-300 ' ></div>
+
+        <div className=' grid grid-cols-3 pb-12 mt-12 '>
+
+          <div className=' col-span-1 flex flex-col justify-center items-center'>
+            <UsersIcon className='size-14 mb-3' />
+            <LandingCounter count={12} />
+            <div className=' text-base'>Team Mammbers</div> 
+          </div>
+
+          <div className='col-span-1 flex flex-col justify-center items-center'>
+            <ClipboardDocumentListIcon className='size-14 mb-3' />
+            <LandingCounter count={103} />
+            <div className=' text-base'>Total Posts</div> 
+          </div>
+
+          <div className='col-span-1 flex flex-col justify-center items-center'>
+            <AcademicCapIcon className='size-14 mb-3' />
+            <LandingCounter count={1_403} />
+            <div className=' text-base'>Users</div> 
+          </div>
 
         </div>
 

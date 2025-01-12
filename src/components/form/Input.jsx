@@ -1,6 +1,7 @@
 import { useEffect, useReducer } from 'react'
 import Validator from '../../validators/Validator';
 import PropTypes from 'prop-types';
+import { ExclamationTriangleIcon } from '@heroicons/react/24/solid';
 
 export default function Input(props) {
 
@@ -67,7 +68,7 @@ export default function Input(props) {
     return (
         <div>
             {element}
-            {errorMessage && <p className="text-red-500 text-sm mt-2 ml-4">* {errorMessage}</p>}
+            {errorMessage && <p className=" flex gap-2 items-center text-red-400  mt-2 ml-4"><ExclamationTriangleIcon className='size-5 text-red-500'/> {errorMessage}</p>}
         </div>
     )
 }

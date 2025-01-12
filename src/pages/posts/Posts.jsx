@@ -26,7 +26,11 @@ export default function posts() {
               <div className='text-base cursor-pointer text-slate-400 font-semibold'>Oldest</div>
             </div>
 
-            
+            <div className='grid grid-cols-3 gap-2 my-10'>
+                  <div className='col-span-1 bg-slate-100 h-40'></div>
+                  <div className='col-span-1 bg-slate-100 h-40'></div>
+                  <div className='col-span-1 bg-slate-100 h-40'></div>
+            </div>
 
           </div>
 

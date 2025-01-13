@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ChatBubbleOvalLeftIcon, CommandLineIcon, DevicePhoneMobileIcon, EnvelopeIcon, LinkIcon, PaperClipIcon, PhoneIcon, RocketLaunchIcon, UsersIcon } from "@heroicons/react/24/outline";
+import { ChatBubbleOvalLeftIcon, CommandLineIcon, DevicePhoneMobileIcon, EnvelopeIcon, LinkIcon, PaperClipIcon, PhoneIcon, RocketLaunchIcon } from "@heroicons/react/24/outline";
 
 
 import Logo from "../assets/images/logo-white.svg";
@@ -26,7 +26,6 @@ export default function Footer() {
         <div className="col-span-1 text-left">
           <div className="flex items-center gap-1 my-5"><PaperClipIcon className="size-6" />Pages</div>
           <div className="text-sm leading-[2rem]">
-            <Link to={"/users"} className="flex items-center gap-x-1 text-white/80"><UsersIcon className="size-5 text-white" />Users</Link>
             <Link to={"/posts"} className="flex items-center gap-x-1 text-white/80"><CommandLineIcon className="size-5 text-white" />Posts</Link>
             <Link to={"/abute"} className="flex items-center gap-x-1 text-white/80"><ChatBubbleOvalLeftIcon className="size-5 text-white" />Abute As</Link>
             <Link to={"/contact-as"} className="flex items-center gap-x-1 text-white/80"><LinkIcon className="size-5 text-white" />Contact As</Link>

@@ -4,7 +4,7 @@ import Logo from "../assets/images/logo-white.svg";
 import { Link } from "react-router-dom";
 
 import AuthContext from "../context/AuthContext";
-import { ArrowLeftEndOnRectangleIcon, ArrowLeftStartOnRectangleIcon, ChatBubbleOvalLeftIcon, ChevronDownIcon, CommandLineIcon,  HomeIcon,  LinkIcon, SquaresPlusIcon, UserIcon, UsersIcon } from "@heroicons/react/24/outline";
+import { ArrowLeftEndOnRectangleIcon, ArrowLeftStartOnRectangleIcon, ChatBubbleOvalLeftIcon, ChevronDownIcon, CommandLineIcon, HomeIcon, LinkIcon, SquaresPlusIcon, UserIcon } from "@heroicons/react/24/outline";
 
 export default function Header() {
 
@@ -20,7 +20,6 @@ export default function Header() {
 
         <div className="flex justify-center items-center gap-x-8 text-lg">
           <Link to={"/"} className="flex justify-around items-center gap-x-1 hover:text-orange-300 hover:border-b hover:border-orange-400"><HomeIcon className="size-6 text-white" />home</Link>
-          <Link to={"/users"} className="flex justify-around items-center gap-x-1 hover:text-orange-300 hover:border-b hover:border-orange-400"><UsersIcon className="size-6 text-white" />users</Link>
           <Link to={"/posts"} className="flex justify-around items-center gap-x-1 hover:text-orange-300 hover:border-b hover:border-orange-400"><CommandLineIcon className="size-6 text-white" />posts</Link>
           <Link to={"/abute"} className="flex justify-around items-center gap-x-1 hover:text-orange-300 hover:border-b hover:border-orange-400"><ChatBubbleOvalLeftIcon className="size-6 text-white" />abute</Link>
           <Link to={"/contact-as"} className="flex justify-around items-center gap-x-1 hover:text-orange-300 hover:border-b hover:border-orange-400"><LinkIcon className="size-6 text-white" />contact as</Link>

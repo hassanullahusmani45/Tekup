@@ -502,6 +502,27 @@ export default function Index() {
 
 
 
+          {/* start Discription abute site posts */}
+          <div className='mt-28 text-center font-semibold text-2xl text-teal-400'>Why we chose Tekup web sit</div>
+          <div className=' w-1/3 mx-auto mt-2 border-t-2 border-dotted border-teal-500 ' ></div>
+
+          <div className='py-8 leading-8 text-justify font-serif text-slate-300 text-sm'>
+            In today is digital age, having a reliable and user-friendly platform is essential for achieving goals efficiently. Tekup website has emerged as a top choice for individuals and organizations, offering exceptional features and unmatched performance. Here is why Tekup stands out:
+
+            Modern Design: Tekup boasts a sleek, intuitive design that ensures easy navigation for all users.
+            Speed and Reliability: The site is optimized for fast loading times, ensuring a seamless user experience.
+            Mobile Responsiveness: Tekup is fully compatible with all devices, from desktops to smartphones.
+            Comprehensive Features: It offers tools and resources tailored to diverse needs, be it for education, business, or personal use.
+            Security First: Advanced security measures protect user data and provide a safe browsing experience.
+            User-Centered Experience: With feedback-driven updates, Tekup always prioritizes user satisfaction.
+            Offline Support: Innovative offline functionalities make it accessible anytime, anywhere.
+            Customizability: Users can personalize their experience to suit their unique preferences.
+            Expert Support Team: A responsive and professional team is always ready to assist with any issues.
+            Community Engagement: Tekup fosters a vibrant community, enabling users to connect, collaborate, and grow together.
+            Tekup is more than just a website; it is a gateway to achieving your objectives with ease. Its innovative approach and dedication to quality make it the perfect partner for modern digital needs. Whether you are a student, developer, or entrepreneur, Tekup is designed to empower you every step of the way.
+          </div>
+          {/* end Discription abute site posts */}
+
 
         </main>
 

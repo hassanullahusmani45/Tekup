@@ -381,6 +381,42 @@ export default function Index() {
 
 
           
+          {/* start category part  */}
+          <div className='mt-28 text-start font-semibold text-xl text-sky-500'><Square3Stack3DIcon className='inline size-8 me-2 text-blue-500' />Numbers of the categories posts</div>
+          <div className='w-1/3 mt-2 border-t-2 border-dotted border-sky-300'></div>
+
+
+          <div className='grid grid-cols-4 gap-x-6 py-8'>
+
+            <Link to={"/posts"} className='flex flex-col justify-center items-center py-5 bg-gradient-to-r from-[#3564ff] to-[#62f229] overflow-hidden rounded-xl'>
+              <ShieldCheckIcon className='size-12 mb-3' />
+              <div className=' font-medium'>7</div>
+              <div className='text-base font-semibold'>Security</div>
+            </Link>
+
+            <Link to={"/posts"} className='flex flex-col justify-center items-center py-5 bg-gradient-to-r from-[#5bf0ca] to-[#0b75ee] overflow-hidden rounded-xl'>
+              <TvIcon className='size-12 mb-3' />
+              <div className=' font-medium'>42</div>
+              <div className='text-base font-semibold'>Frontend</div>
+            </Link>
+
+            <Link to={"/posts"} className='flex flex-col justify-center items-center py-5 bg-gradient-to-r from-[#9e4bc5] to-[#60d6f3] overflow-hidden rounded-xl'>
+              <CircleStackIcon className='size-12 mb-3' />
+              <div className=' font-medium'>14</div>
+              <div className='text-base font-semibold'>Backend</div>
+            </Link>
+
+            <Link to={"/posts"} className='flex flex-col justify-center items-center py-5 bg-gradient-to-r from-[#f1ce59] to-[#f04d75] overflow-hidden rounded-xl'>
+              <TrophyIcon className='size-12 mb-3' />
+              <div className='font-medium'>13</div>
+              <div className='text-base font-semibold'>Artificial intelligence</div>
+            </Link>
+
+          </div>
+          {/* end category part  */}
+
+
+          
         </main>
 
       </div>

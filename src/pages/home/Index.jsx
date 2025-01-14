@@ -235,6 +235,152 @@ export default function Index() {
 
 
           
+          {/* start all posts */}
+          <div className='mt-28 text-start font-semibold text-xl text-fuchsia-500'><InboxStackIcon className='inline size-8 me-2 text-violet-500' />All posts</div>
+          <div className='w-1/4 mt-2 border-t-2 border-dotted border-fuchsia-300 '></div>
+
+          <div className='grid grid-cols-4 gap-4 my-10'>
+
+            <div className='col-span-1'>
+              <Post
+                src={post1}
+                author="Nasibullah Nizai"
+                date="1403-9-21"
+                link="/"
+                title='What is TailwindCSS framwork?'
+                desc='TailwindCSS is a utility-first CSS framework that provides pre-defined classes for fast and customizable styling directly in your HTML. It simplifies responsive design and speeds up development without writing custom CSS.'
+              />
+            </div>
+
+            <div className='col-span-1'>
+              <Post
+                src={post2}
+                author="Hassanullah Najimi"
+                date="1403-9-23"
+                link="/"
+                title='The best programming languages in 2025.'
+                desc='Python and JavaScript continue to lead in 2025 due to their versatility, ease of use, and applications in AI, web development, and data science.'
+              />
+            </div>
+
+            <div className='col-span-1'>
+              <Post
+                src={post3}
+                author="Ahmadullah Sabir"
+                date="1403-10-3"
+                link="/"
+                title='Why is Python the favorite programming language of hackers?'
+                desc='Python is a favorite among hackers due to its simplicity, versatility, and extensive library support. It enables quick development of scripts and tools for tasks like web scraping, network scanning, and password cracking. Libraries like Scapy, Socket, and PyCrypto make it ideal for penetration testing and cybersecurity.'
+              />
+            </div>
+
+            <div className='col-span-1'>
+              <Post
+                src={post2}
+                author="Hassanullah Najimi"
+                date="1403-9-23"
+                link="/"
+                title='The best programming languages in 2025.'
+                desc='Python and JavaScript continue to lead in 2025 due to their versatility, ease of use, and applications in AI, web development, and data science.'
+              />
+            </div>
+
+
+            <div className='col-span-1'>
+              <Post
+                src={post3}
+                author="Hassanullah Usmani"
+                date="1403-10-3"
+                link="/"
+                title='Why is Python the favorite programming language of hackers?'
+                desc='Python is a favorite among hackers due to its simplicity, versatility, and extensive library support. It enables quick development of scripts and tools for tasks like web scraping, network scanning, and password cracking. Libraries like Scapy, Socket, and PyCrypto make it ideal for penetration testing and cybersecurity.'
+              />
+            </div>
+
+            <div className='col-span-1'>
+              <Post
+                src={post1}
+                author="Mohmmadajan Mohmmady"
+                date="1403-9-21"
+                link="/"
+                title='What is TailwindCSS framwork?'
+                desc='TailwindCSS is a utility-first CSS framework that provides pre-defined classes for fast and customizable styling directly in your HTML. It simplifies responsive design and speeds up development without writing custom CSS.'
+              />
+            </div>
+
+            <div className='col-span-1'>
+              <Post
+                src={post2}
+                author="Hassanullah Najimi"
+                date="1403-9-23"
+                link="/"
+                title='The best programming languages in 2025.'
+                desc='Python and JavaScript continue to lead in 2025 due to their versatility, ease of use, and applications in AI, web development, and data science.'
+              />
+            </div>
+
+            <div className='col-span-1'>
+              <Post
+                src={post3}
+                author="Ahmadullah Sabir"
+                date="1403-10-3"
+                link="/"
+                title='Why is Python the favorite programming language of hackers?'
+                desc='Python is a favorite among hackers due to its simplicity, versatility, and extensive library support. It enables quick development of scripts and tools for tasks like web scraping, network scanning, and password cracking. Libraries like Scapy, Socket, and PyCrypto make it ideal for penetration testing and cybersecurity.'
+              />
+            </div>
+
+            <div className='col-span-1'>
+              <Post
+                src={post2}
+                author="Hassanullah Najimi"
+                date="1403-9-23"
+                link="/"
+                title='The best programming languages in 2025.'
+                desc='Python and JavaScript continue to lead in 2025 due to their versatility, ease of use, and applications in AI, web development, and data science.'
+              />
+            </div>
+
+            <div className='col-span-1'>
+              <Post
+                src={post3}
+                author="Ahmadullah Sabir"
+                date="1403-10-3"
+                link="/"
+                title='Why is Python the favorite programming language of hackers?'
+                desc='Python is a favorite among hackers due to its simplicity, versatility, and extensive library support. It enables quick development of scripts and tools for tasks like web scraping, network scanning, and password cracking. Libraries like Scapy, Socket, and PyCrypto make it ideal for penetration testing and cybersecurity.'
+              />
+            </div>
+
+            <div className='col-span-1'>
+              <Post
+                src={post2}
+                author="Hassanullah Najimi"
+                date="1403-9-23"
+                link="/"
+                title='The best programming languages in 2025.'
+                desc='Python and JavaScript continue to lead in 2025 due to their versatility, ease of use, and applications in AI, web development, and data science.'
+              />
+            </div>
+
+            <div className='col-span-1'>
+              <Post
+                src={post3}
+                author="Ahmadullah Sabir"
+                date="1403-10-3"
+                link="/"
+                title='Why is Python the favorite programming language of hackers?'
+                desc='Python is a favorite among hackers due to its simplicity, versatility, and extensive library support. It enables quick development of scripts and tools for tasks like web scraping, network scanning, and password cracking. Libraries like Scapy, Socket, and PyCrypto make it ideal for penetration testing and cybersecurity.'
+              />
+            </div>
+
+          </div>
+          {/* end all posts */}
+
+
+
+
+          
         </main>
 
       </div>

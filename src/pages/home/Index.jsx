@@ -76,7 +76,166 @@ export default function Index() {
         </div>
         {/* end heading part  */}
 
-       
+        <main className='w-[95%] mx-auto'>
+
+          {/* start SwiperJs part  */}
+          <div className='mt-28 text-start font-semibold text-xl text-teal-500'><SparklesIcon className='inline size-8 me-2 text-green-500' /> Our Experienced Team</div>
+          <div className='w-1/4 mt-2 border-t-2 border-dotted border-teal-300 '></div>
+
+          <div className='py-8'>
+            <Swiper
+              modules={[Autoplay]}
+              slidesPerView={3}
+              spaceBetween={40}
+              loop={true}
+              autoplay={{
+                delay: 2500,
+                disableOnInteraction: false,
+              }}
+              className="mySwiper"
+            >
+              <SwiperSlide>
+                <div className='transition-all'>
+                  <div className='flex justify-center items-center bg-slate-800/90 pt-6 px-4 rounded-2xl shadow-3xl'>
+                    <div className='text-center'>
+
+                      <Link to={"/posts"} className='inline-block'>
+                        <img src={hassanProfile} alt='abute' className='w-40 h-40 rounded-full border p-1.5 mx-auto' />
+                      </Link>
+                      <div className='flex justify-center items-center gap-4 mt-4'>
+                        <Link to={"/"} className="hover:translate-y-[-5px] hover:text-green-500 transition-transform duration-500">
+                          <EnvelopeIcon className="size-5" />
+                        </Link>
+                        <Link to={"/"} className="hover:translate-y-[-5px] hover:text-green-500 transition-transform duration-500">
+                          <PhoneIcon className="size-5" />
+                        </Link>
+                        <Link to={"/"} className="hover:translate-y-[-5px] hover:text-green-500 transition-transform duration-500">
+                          <GlobeEuropeAfricaIcon className="size-6" />
+                        </Link>
+                      </div>
+
+                      <div className='bg-slate-700 text-base px-4 py-2 mt-4 rounded-full space-y-4 hover:rounded-xl transition-all'>
+                        <Link to={"/posts"} className='text-white font-medium text-base'>Hassanullah Usmani</Link>
+                        <div className='text-slate-200 text-sm'>LRTM full-stack developer</div>
+                      </div>
+
+                      <div className='text-slate-200 justify-center text-sm leading-6 h-40 mt-6 line-clamp-6'>
+                        Hassanullah Usmani is a skilled LRTM full-stack developer with expertise in creating robust and dynamic web applications. He combines technical proficiency with innovative problem-solving to deliver high-quality solutions.
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </SwiperSlide>
+
+              <SwiperSlide>
+                <div className='transition-all'>
+                  <div className='flex justify-center items-center bg-slate-800/90 pt-6 px-4 rounded-2xl shadow-3xl'>
+                    <div className='text-center'>
+
+                      <Link to={"/posts"} className='inline-block'>
+                        <img src={nasibjanProfile} alt='abute' className='w-40 h-40 rounded-full border p-1.5 mx-auto' />
+                      </Link>
+                      <div className='flex justify-center items-center gap-4 mt-4'>
+                        <Link to={"/"} className="hover:translate-y-[-5px] hover:text-green-500 transition-transform duration-500">
+                          <EnvelopeIcon className="size-5" />
+                        </Link>
+                        <Link to={"/"} className="hover:translate-y-[-5px] hover:text-green-500 transition-transform duration-500">
+                          <PhoneIcon className="size-5" />
+                        </Link>
+                        <Link to={"/"} className="hover:translate-y-[-5px] hover:text-green-500 transition-transform duration-500">
+                          <GlobeEuropeAfricaIcon className="size-6" />
+                        </Link>
+                      </div>
+
+                      <div className='bg-slate-700 text-base px-4 py-2 mt-4 rounded-full space-y-4 hover:rounded-xl transition-all'>
+                        <Link to={"/posts"} className='text-white font-medium text-base'>Nasibullah Niazi</Link>
+                        <div className='text-slate-200 text-sm'>Backend developer</div>
+                      </div>
+
+                      <div className='text-slate-200 justify-center text-sm leading-6 h-40 mt-6 line-clamp-6'>
+                        Nasibullah Niazi is a proficient backend developer with expertise in building and maintaining efficient server-side systems, focusing on database management, API development, and optimizing application performance.
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </SwiperSlide>
+
+              <SwiperSlide>
+                <div className='transition-all'>
+                  <div className='flex justify-center items-center bg-slate-800/90 pt-6 px-4 rounded-2xl shadow-3xl'>
+                    <div className='text-center'>
+
+                      <Link to={"/posts"} className='inline-block'>
+                        <img src={profile} alt='abute' className='w-40 h-40 rounded-full border p-1.5 mx-auto' />
+                      </Link>
+                      <div className='flex justify-center items-center gap-4 mt-4'>
+                        <Link to={"/"} className="hover:translate-y-[-5px] hover:text-green-500 transition-transform duration-500">
+                          <EnvelopeIcon className="size-5" />
+                        </Link>
+                        <Link to={"/"} className="hover:translate-y-[-5px] hover:text-green-500 transition-transform duration-500">
+                          <PhoneIcon className="size-5" />
+                        </Link>
+                        <Link to={"/"} className="hover:translate-y-[-5px] hover:text-green-500 transition-transform duration-500">
+                          <GlobeEuropeAfricaIcon className="size-6" />
+                        </Link>
+                      </div>
+
+                      <div className='bg-slate-700 text-base px-4 py-2 mt-4 rounded-full space-y-4 hover:rounded-xl transition-all'>
+                        <Link to={"/posts"} className='text-white font-medium text-base'>Ahmadullah Saber</Link>
+                        <div className='text-slate-200 text-sm'>Frontend developer</div>
+                      </div>
+
+                      <div className='text-slate-200 justify-center text-sm leading-6 h-40 mt-6 line-clamp-6'>
+                        Ahmadullah Saber is a talented frontend developer specializing in creating user-friendly, visually appealing, and responsive web interfaces.
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </SwiperSlide>
+
+              <SwiperSlide>
+                <div className='transition-all'>
+                  <div className='flex justify-center items-center bg-slate-800/90 pt-6 px-4 rounded-2xl shadow-3xl'>
+                    <div className='text-center'>
+
+                      <Link to={"/posts"} className='inline-block'>
+                        <img src={mohmmadProfile} alt='abute' className='w-40 h-40 rounded-full border p-1.5 mx-auto' />
+                      </Link>
+                      <div className='flex justify-center items-center gap-4 mt-4'>
+                        <Link to={"/"} className="hover:translate-y-[-5px] hover:text-green-500 transition-transform duration-500">
+                          <EnvelopeIcon className="size-5" />
+                        </Link>
+                        <Link to={"/"} className="hover:translate-y-[-5px] hover:text-green-500 transition-transform duration-500">
+                          <PhoneIcon className="size-5" />
+                        </Link>
+                        <Link to={"/"} className="hover:translate-y-[-5px] hover:text-green-500 transition-transform duration-500">
+                          <GlobeEuropeAfricaIcon className="size-6" />
+                        </Link>
+                      </div>
+
+                      <div className='bg-slate-700 text-base px-4 py-2 mt-4 rounded-full space-y-4 hover:rounded-xl transition-all'>
+                        <Link to={"/posts"} className='text-white font-medium text-base'>Mohmmadajan Mohmmady</Link>
+                        <div className='text-slate-200 text-sm'>IT manager</div>
+                      </div>
+                      <div className='text-slate-200 justify-center text-sm leading-6 h-40 mt-6'>Mohmmady is an accomplished IT Manager known for his expertise in overseeing and optimizing IT operations, ensuring seamless technology integration and innovation within organizations.</div>
+
+                    </div>
+                  </div>
+                </div>
+              </SwiperSlide>
+
+            </Swiper>
+          </div>
+          {/* end SwiperJs part  */}
+
+
+
+
+          
+        </main>
 
       </div>
     </Layout>

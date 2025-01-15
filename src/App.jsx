@@ -22,6 +22,7 @@ function App() {
       setToken(token);
       setUserInformation(userInfo);
       localStorage.setItem("token", JSON.stringify(token));
+      localStorage.setItem("userInfo", JSON.stringify(userInfo));
       navigate("/");
     }, []);
 
@@ -35,6 +36,7 @@ function App() {
           setToken(null);
           setUserInformation(null);
           localStorage.removeItem("token");
+          localStorage.removeItem("userInfo");
           navigate("/");
           console.log("Logged out successfully");
 

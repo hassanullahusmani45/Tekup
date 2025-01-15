@@ -6,14 +6,14 @@ export default function Post(props) {
 
   return (
     <div className="flex flex-col justify-between rounded-xl bg-slate-800">
-      <img className="w-full h-40 rounded-t-xl overflow-hidden" src={props.src} />
+      <Link to={props.link}><img className="w-full h-40 rounded-t-xl overflow-hidden" src={props.src} /></Link>
       <div className="px-4 py-8 flex flex-col justify-between h-[295px]">
-        <div className="font-medium line-clamp-2">{props.title}</div>
+        <Link to={props.link} className="font-medium line-clamp-2">{props.title}</Link>
         <div className="text-slate-400 text-sm line-clamp-3">{props.desc}</div>
 
         <div className="flex justify-between items-center text-slate-300 pb-4 border-b border-b-slate-500">
-          <div>{props.author}</div>
-          <div>{props.date}</div>
+          <div className="line-clamp-1">{props.author}</div>
+          <div className="text-nowrap">{props.date}</div>
         </div>
         <Link to={props.link} className="flex justify-center items-center gap-1 text-sm">
           Study the article

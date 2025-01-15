@@ -34,7 +34,7 @@ export default function Contact() {
                     <div className=" relative col-span-1 text-left bg-slate-800/80 p-8 mr-20 rounded-2xl shadow-xl">
 
                         <div className="flex bg-inherit dark:bg-slate-600 justify-center items-center w-32 h-32 rounded-full absolute mx-auto right-0 left-0 -inset-y-10 transform duration-300">
-                            <img className=" min-w-32 min-h-32 p-2 rounded-full border-[0.20rem] animate-pulse"
+                            <img className=" min-w-32 min-h-32 p-2 rounded-full border-4 border-y border-dotted animate-pulse"
                                 src={hassanProfile} />
                         </div>
                         <div className="text-base font-bold text-left mt-8">Abute Me</div>

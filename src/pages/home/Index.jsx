@@ -1,4 +1,4 @@
-import { AcademicCapIcon, ChevronLeftIcon, ChevronRightIcon, CircleStackIcon, ClipboardDocumentListIcon, EnvelopeIcon, GlobeEuropeAfricaIcon, InboxStackIcon, MagnifyingGlassIcon, PhoneIcon, ShieldCheckIcon, Square3Stack3DIcon, TrophyIcon, TvIcon, UsersIcon } from '@heroicons/react/24/outline';
+import { AcademicCapIcon, ChevronLeftIcon, ChevronRightIcon, CircleStackIcon, ClipboardDocumentListIcon, InboxStackIcon, MagnifyingGlassIcon, ShieldCheckIcon, Square3Stack3DIcon, TrophyIcon, TvIcon, UsersIcon } from '@heroicons/react/24/outline';
 import Layout from '../../Layout/Layout';
 import LandingCounter from '../../components/LandingCounter';
 import profile from '../../assets/images/profile.jpg'

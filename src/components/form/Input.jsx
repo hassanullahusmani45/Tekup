@@ -24,8 +24,8 @@ export default function Input(props) {
         }
     }
     const [maininput, dispatch] = useReducer(inputReducer, {
-        value: "",
-        isValid: false,
+        value: props.value,
+        isValid: props.isValid,
         errorMessage: null,
     })
 
@@ -40,7 +40,7 @@ export default function Input(props) {
             {
                 type: "CHANG",
                 value: event.target.value.trim(),
-                isValid: event.target.value.trim().length > 0 ? false : true,
+                isValid: event.target.value.trim().length > 0 ? true : false,
                 validationes: props.validationes
             }
         )
@@ -68,7 +68,7 @@ export default function Input(props) {
     return (
         <div>
             {element}
-            {errorMessage && <p className=" flex gap-2 items-center text-red-400  mt-2 ml-4"><ExclamationTriangleIcon className='size-5 text-red-500'/> {errorMessage}</p>}
+            {errorMessage && <p className=" flex gap-2 items-center text-red-400  mt-2 ml-4"><ExclamationTriangleIcon className='size-5 text-red-500' /> {errorMessage}</p>}
         </div>
     )
 }
@@ -76,6 +76,8 @@ export default function Input(props) {
 Input.propTypes = {
     element: PropTypes.oneOf(['input', 'textarea']).isRequired,
     type: PropTypes.string,
+    value: PropTypes.string,
+    isValid: PropTypes.bool,
     placeholder: PropTypes.string,
     className: PropTypes.string,
     validationes: PropTypes.arrayOf(PropTypes.object).isRequired,

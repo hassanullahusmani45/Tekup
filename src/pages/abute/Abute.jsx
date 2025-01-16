@@ -7,6 +7,7 @@ import nasibjanProfile from '../../assets/images/nasibjan.jpg'
 import mohmmadProfile from '../../assets/images/mohmmad.jpg'
 import { AcademicCapIcon, ClipboardDocumentListIcon, EnvelopeIcon, GlobeEuropeAfricaIcon, PhoneIcon, UsersIcon } from '@heroicons/react/24/outline'
 import LandingCounter from '../../components/LandingCounter'
+import TeamMemmberCard from '../../components/TeamMemmberCard'
 
 export default function Abute() {
 
@@ -31,119 +32,58 @@ export default function Abute() {
 
         <div className='grid grid-cols-4 gap-6 mt-16 pb-16'>
 
-          <div className='cols-span-1 hover:scale-95 transition-all'>
-            <div className='flex justify-center items-center bg-slate-800/90 pt-6 px-4 rounded-2xl shadow-3xl'>
-              <div className='text-center'>
-
-                <img src={hassanProfile} alt='abute' className='w-40 h-40 rounded-full border p-1.5 mx-auto' />
-                <div className='flex justify-center items-center gap-4 mt-4'>
-                  <Link to={"/"} className="hover:translate-y-[-5px] hover:text-green-500 transition-transform duration-500">
-                    <EnvelopeIcon className="size-5" />
-                  </Link>
-                  <Link to={"/"} className="hover:translate-y-[-5px] hover:text-green-500 transition-transform duration-500">
-                    <PhoneIcon className="size-5" />
-                  </Link>
-                  <Link to={"/"} className="hover:translate-y-[-5px] hover:text-green-500 transition-transform duration-500">
-                    <GlobeEuropeAfricaIcon className="size-6" />
-                  </Link>
-                </div>
-
-                <div className='bg-slate-700 text-base px-4 py-2 mt-4 rounded-full space-y-4 hover:rounded-xl transition-all'>
-                  <div className='text-white font-medium text-base'>Hassanullah Usmani</div>
-                  <div className='text-slate-200 text-sm'>LRTM full-stack developer</div>
-                </div>
-
-                <div className='text-slate-200 justify-center text-sm leading-6 h-44 mt-6'>
-                  Hassanullah Usmani is a skilled LRTM full-stack developer with expertise in creating robust and dynamic web applications. He combines technical proficiency with innovative problem-solving to deliver high-quality solutions.
-                </div>
 
 
-              </div>
-            </div>
+
+          <div className='cols-span-1 hover:scale-95'>
+            <TeamMemmberCard
+              profile={hassanProfile}
+              email={"/"}
+              whatsApp={"/"}
+              websit={"/"}
+              name='Hassanullah Usmani'
+              positionTitle='LRTM full-stack developer'
+              quickInfo='Hassanullah Usmani is a skilled LRTM full-stack developer with expertise in creating robust and dynamic web applications. He combines technical proficiency with innovative problem-solving to deliver high-quality solutions.'
+            />
           </div>
 
 
-          <div className='cols-span-1 hover:scale-95 transition-all'>
-            <div className='flex justify-center items-center bg-slate-800/90 pt-6 px-4 rounded-2xl shadow-3xl'>
-              <div className='text-center'>
-
-                <img src={nasibjanProfile} alt='abute' className='w-40 h-40 rounded-full border p-1.5 mx-auto' />
-                <div className='flex justify-center items-center gap-4 mt-4'>
-                  <Link to={"/"} className="hover:translate-y-[-5px] hover:text-green-500 transition-transform duration-500">
-                    <EnvelopeIcon className="size-5" />
-                  </Link>
-                  <Link to={"/"} className="hover:translate-y-[-5px] hover:text-green-500 transition-transform duration-500">
-                    <PhoneIcon className="size-5" />
-                  </Link>
-                  <Link to={"/"} className="hover:translate-y-[-5px] hover:text-green-500 transition-transform duration-500">
-                    <GlobeEuropeAfricaIcon className="size-6" />
-                  </Link>
-                </div>
-
-                <div className='bg-slate-700 text-base px-4 py-2 mt-4 rounded-full space-y-4 hover:rounded-xl transition-all'>
-                  <div className='text-white font-medium text-base'>Nasibullah Niazi</div>
-                  <div className='text-slate-200 text-sm'>Backend developer</div>
-                </div>
-                <div className='text-slate-200 justify-center text-sm leading-6 h-44 mt-6'>Nasibullah Niazi is a proficient backend developer with expertise in building and maintaining efficient server-side systems, focusing on database management, API development, and optimizing application performance.</div>
-
-              </div>
-            </div>
+          <div className='cols-span-1 hover:scale-95'>
+            <TeamMemmberCard
+              profile={nasibjanProfile}
+              email={"/"}
+              whatsApp={"/"}
+              websit={"/"}
+              name='Nasibullah Niazi'
+              positionTitle='Backend developer'
+              quickInfo='Nasibullah Niazi is a proficient backend developer with expertise in building and maintaining efficient server-side systems, focusing on database management, API development, and optimizing application performance.'
+            />
           </div>
 
 
-          <div className='cols-span-1 hover:scale-95 transition-all'>
-            <div className='flex justify-center items-center bg-slate-800/90 pt-6 px-4 rounded-2xl shadow-3xl'>
-              <div className='text-center'>
-
-                <img src={profile} alt='abute' className='w-40 h-40 rounded-full border p-1.5 mx-auto' />
-                <div className='flex justify-center items-center gap-4 mt-4'>
-                  <Link to={"/"} className="hover:translate-y-[-5px] hover:text-green-500 transition-transform duration-500">
-                    <EnvelopeIcon className="size-5" />
-                  </Link>
-                  <Link to={"/"} className="hover:translate-y-[-5px] hover:text-green-500 transition-transform duration-500">
-                    <PhoneIcon className="size-5" />
-                  </Link>
-                  <Link to={"/"} className="hover:translate-y-[-5px] hover:text-green-500 transition-transform duration-500">
-                    <GlobeEuropeAfricaIcon className="size-6" />
-                  </Link>
-                </div>
-
-                <div className='bg-slate-700 text-base px-4 py-2 mt-4 rounded-full space-y-4 hover:rounded-xl transition-all'>
-                  <div className='text-white font-medium text-base'>Ahmadullah Saber</div>
-                  <div className='text-slate-200 text-sm'>Frontend developer</div>
-                </div>
-                <div className='text-slate-200 justify-center text-sm leading-6 h-44 mt-6'>Ahmadullah Saber is a talented frontend developer specializing in creating user-friendly, visually appealing, and responsive web interfaces.</div>
-
-              </div>
-            </div>
+          <div className='cols-span-1 hover:scale-95'>
+            <TeamMemmberCard
+              profile={profile}
+              email={"/"}
+              whatsApp={"/"}
+              websit={"/"}
+              name='Ahmadullah Saber'
+              positionTitle='Frontend developer'
+              quickInfo='Ahmadullah Saber is a talented frontend developer specializing in creating user-friendly, visually appealing, and responsive web interfaces.'
+            />
           </div>
 
 
-          <div className='cols-span-1 hover:scale-95 transition-all'>
-            <div className='flex justify-center items-center bg-slate-800/90 pt-6 px-4 rounded-2xl shadow-3xl'>
-              <div className='text-center'>
-
-                <img src={mohmmadProfile} alt='abute' className='w-40 h-40 rounded-full border p-1.5 mx-auto' />
-                <div className='flex justify-center items-center gap-4 mt-4'>
-                  <Link to={"/"} className="hover:translate-y-[-5px] hover:text-green-500 transition-transform duration-500">
-                    <EnvelopeIcon className="size-5" />
-                  </Link>
-                  <Link to={"/"} className="hover:translate-y-[-5px] hover:text-green-500 transition-transform duration-500">
-                    <PhoneIcon className="size-5" />
-                  </Link>
-                  <Link to={"/"} className="hover:translate-y-[-5px] hover:text-green-500 transition-transform duration-500">
-                    <GlobeEuropeAfricaIcon className="size-6" />
-                  </Link>
-                </div>
-
-                <div className='bg-slate-700 text-base px-4 py-2 mt-4 rounded-full space-y-4 hover:rounded-xl transition-all'>
-                  <div className='text-white font-medium text-base'>Mohmmadajan Mohmmady</div>
-                  <div className='text-slate-200 text-sm'>IT manager</div>
-                </div>
-                <div className='text-slate-200 justify-center text-sm leading-6 h-44 mt-6'>Mohmmady is an accomplished IT Manager known for his expertise in overseeing and optimizing IT operations, ensuring seamless technology integration and innovation within organizations.</div>
-
-              </div>
-            </div>
+          <div className='cols-span-1 hover:scale-95'>
+            <TeamMemmberCard
+              profile={mohmmadProfile}
+              email={"/"}
+              whatsApp={"/"}
+              websit={"/"}
+              name='Mohmmadajan Mohmmady'
+              positionTitle='IT manager'
+              quickInfo='Mohmmady is an accomplished IT Manager known for his expertise in overseeing and optimizing IT operations, ensuring seamless technology integration and innovation within organizations.'
+            />
           </div>
 
 
@@ -160,19 +100,19 @@ export default function Abute() {
           <div className=' col-span-1 flex flex-col justify-center items-center'>
             <UsersIcon className='size-14 mb-3' />
             <LandingCounter count={12} />
-            <div className=' text-base'>Team Mammbers</div> 
+            <div className=' text-base'>Team Mammbers</div>
           </div>
 
           <div className='col-span-1 flex flex-col justify-center items-center'>
             <ClipboardDocumentListIcon className='size-14 mb-3' />
             <LandingCounter count={103} />
-            <div className=' text-base'>Total Posts</div> 
+            <div className=' text-base'>Total Posts</div>
           </div>
 
           <div className='col-span-1 flex flex-col justify-center items-center'>
             <AcademicCapIcon className='size-14 mb-3' />
             <LandingCounter count={1_403} />
-            <div className=' text-base'>Users</div> 
+            <div className=' text-base'>Users</div>
           </div>
 
         </div>

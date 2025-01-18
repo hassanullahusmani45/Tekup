@@ -26,7 +26,7 @@ export default function Contact() {
                                 <input type="text" placeholder="Full Name" className="font-base rounded-full shadow-md block w-full p-2.5 px-6 bg-slate-950/70 placeholder:text-gray-200 placeholder:text-sm placeholder:font-normal" />
                                 <input type="email" placeholder="Email" className="font-base rounded-full shadow-md block w-full p-2.5 px-6 bg-slate-950/70 placeholder:text-gray-200 placeholder:text-sm placeholder:font-normal" />
                                 <textarea placeholder="Message" className="font-base rounded-xl shadow-md block w-full p-2.5 px-6 bg-slate-950/70 placeholder:text-gray-200 placeholder:text-sm placeholder:font-normal" rows={11} />
-                                <button type="submit" className="w-fit mt-6 bg-blue-500 hover:bg-blue-600 px-10 py-2.5 rounded-full ">Send</button>
+                                <button type="submit" className="w-fit mt-6 bg-gradient-to-r from-blue-900 to-blue-400 hover:bg-gradient-to-l px-16 py-2.5 rounded-full transition-all">Send</button>
                             </div>
                         </form>
                     </div>

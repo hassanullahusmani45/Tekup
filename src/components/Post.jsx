@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function Post(props) {
 
   return (
-    <div className="flex flex-col justify-between rounded-xl bg-slate-800">
+    <div className={`flex flex-col justify-between rounded-xl ${ !props.className && "bg-slate-800"} ${props.className}`}>
       <Link to={props.link}><img className="w-full h-40 rounded-t-xl overflow-hidden" src={props.src} /></Link>
       <div className="px-4 py-8 flex flex-col justify-between h-[295px]">
         <Link to={props.link} className="font-medium line-clamp-2">{props.title}</Link>
@@ -31,6 +31,7 @@ Post.propTypes = {
   date: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
+  className: PropTypes.string,
 }
 
 

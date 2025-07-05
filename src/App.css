@@ -22,3 +22,19 @@
   cursor: pointer;
   margin: 0;
 }
+.swal-button--confirm{
+  background-color: lightseagreen;
+  padding: 5px 4rem;
+}
+.swal-button--confirm:hover{
+  background-color: rgb(23, 150, 143) !important;
+}
+
+.swal-button--cancel{
+  background-color: tomato;
+  padding: 5px 4rem;
+
+}
+.swal-button--cancel:hover {
+  background-color: rgb(190, 74, 54) !important;
+}

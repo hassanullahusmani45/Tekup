@@ -28,7 +28,7 @@ export default function TeamMemmberCard(props) {
                             <div className='text-slate-200 text-sm'>{props.positionTitle}</div>
                         </div>
 
-                        <div className='text-slate-200 justify-center text-sm leading-6 h-40 mt-6 line-clamp-6'>{props.quickInfo}</div>
+                        <div className='text-slate-200 justify-center text-sm leading-6 h-40 mt-6 line-clamp-6'>{(props.quickInfo).slice(0,250)} ...</div>
 
                     </div>
                 </div>

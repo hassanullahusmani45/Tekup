@@ -14,7 +14,7 @@ export default function LandingCounter({ count }) {
         }
         return prevCounter + 1;
       });
-    }, 10);
+    }, 200);
 
     return () => clearInterval(interval);
   }, [count]);

@@ -15,12 +15,32 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState(null);
   const [userInformation, setUserInformation] = useState(null);
+  const [userProfile, setUserProfile] = useState(null);
+  const [users, setUsers] = useState([]);
+  const [allArticles, setAllArticles] = useState([]);
+  const [allContacts, setAllContacts] = useState([]);
+
+
+  const updateProfile = useCallback((newProfilePath) => {
+    setUserProfile(newProfilePath);
+    const updatedUserInformation = { ...userInformation, profile: newProfilePath };
+    setUserInformation(updatedUserInformation);
+    localStorage.setItem("userInfo", JSON.stringify(updatedUserInformation));
+  }, [userInformation]);
+
+  const updateNameOrEmail = useCallback((name, email) => {
+    const updateUserNameOrEmail = { ...userInformation, name: name, email: email };
+    setUserInformation(updateUserNameOrEmail);
+    localStorage.setItem("userInfo", JSON.stringify(updateUserNameOrEmail));
+  }, [userInformation]);
 
   const login = useCallback(
     (token, userInfo) => {
       setIsLoggedIn(true);
       setToken(token);
       setUserInformation(userInfo);
+      setUserProfile(userInfo.profile)
+
       localStorage.setItem("token", JSON.stringify(token));
       localStorage.setItem("userInfo", JSON.stringify(userInfo));
       navigate("/");
@@ -35,6 +55,7 @@ function App() {
           setIsLoggedIn(false);
           setToken(null);
           setUserInformation(null);
+          setUserProfile(null);
           localStorage.removeItem("token");
           localStorage.removeItem("userInfo");
           navigate("/");
@@ -74,8 +95,84 @@ function App() {
       }
     }).catch(error => {
       console.log(error.response);
-    })
+    });
   }, []);
+
+
+  useEffect(() => {
+    const userToken = JSON.parse(localStorage.getItem("token"));
+    axios.get(
+      "/all-user",
+      {
+        headers: {
+          Authorization: `Bearer ${userToken}`
+        }
+      }
+    ).then(response => {
+      setUsers(response.data.users)
+    });
+
+    axios.get("/all-dashbord-articles",
+      {
+        headers: {
+          Authorization: `Bearer ${userToken}`
+        }
+      }
+    ).then(response => {
+      setAllArticles(response.data.allDashbordArticles)
+    });
+
+    axios.get("/all-dashbord-contact",
+      {
+        headers: {
+          Authorization: `Bearer ${userToken}`
+        }
+      }
+    ).then(response => {
+
+      setAllContacts(response.data.contacts)
+    });
+
+    
+  }, []);
+
+
+  const updateUserRole = useCallback((userId, newRole) => {
+    setUsers((prevUsers) =>
+      prevUsers.map(user =>
+        user.id === userId ? { ...user, role: newRole } : user
+      )
+    );
+  }, []);
+
+  const updateArticleStatus = useCallback((articleId, newStatus) => {
+    setAllArticles((prevArticle) =>
+      prevArticle.map(article =>
+        article.id === articleId ? { ...article, status: newStatus } : article
+      )
+    );
+  }, []);
+
+  const afterDeleteArticle = useCallback((articleId) => {
+    setAllArticles((prevArticle) =>
+      prevArticle.filter(article => article.id !== articleId)
+    );
+  }, [setAllArticles]);
+
+  const updateContactStatus = useCallback((contactID, newStatus) => {
+    setAllArticles((prevContact) =>
+      prevContact.map(contact =>
+        contact.id === contactID ? { ...contact, status: newStatus } : contact
+      )
+    );
+  }, []);
+
+  const afterDeleteContact = useCallback((contactID) => {
+    setAllArticles((prevContact) =>
+      prevContact.filter(contact => contact.id !== contactID)
+    );
+  }, [setAllArticles]);
+
 
 
   return (
@@ -84,6 +181,17 @@ function App() {
         isLoggedIn,
         token,
         userInformation,
+        userProfile,
+        users,
+        updateUserRole,
+        allArticles,
+        updateArticleStatus,
+        afterDeleteArticle,
+        allContacts,
+        updateContactStatus,
+        afterDeleteContact,
+        updateNameOrEmail,
+        updateProfile,
         login,
         logout,
       }}

@@ -5,12 +5,31 @@ import profile from '../../assets/images/profile.jpg'
 import hassanProfile from '../../assets/images/hassan.JPG'
 import nasibjanProfile from '../../assets/images/nasibjan.jpg'
 import mohmmadProfile from '../../assets/images/mohmmad.jpg'
-import { AcademicCapIcon, ClipboardDocumentListIcon, EnvelopeIcon, GlobeEuropeAfricaIcon, PhoneIcon, UsersIcon } from '@heroicons/react/24/outline'
+import { AcademicCapIcon, ClipboardDocumentListIcon, UsersIcon } from '@heroicons/react/24/outline'
 import LandingCounter from '../../components/LandingCounter'
 import TeamMemmberCard from '../../components/TeamMemmberCard'
+import { useEffect, useState } from 'react'
+import axios from '../../api/axios'
 
 export default function Abute() {
+  const [articleNumbers, setArticleNumbers] = useState(0);
+  const [teamMembersNumbers, setTeamMembersNumbers] = useState(0);
+  const [userNumbers, setUserNumbers] = useState(0);
+  const [teamMembers, setTeamMembers] = useState([]);
 
+  useEffect(() => {
+    axios.get('/team-members')
+      .then(response => {
+        setTeamMembers(response.data.teamMembers)
+      });
+
+    axios.get('/leading-conter')
+      .then(response => {
+        setArticleNumbers(response.data.articleNumbers);
+        setTeamMembersNumbers(response.data.teamMembersNumbers);
+        setUserNumbers(response.data.userNumbers);
+      });
+  });
   return (
     <Layout>
       <>
@@ -33,58 +52,20 @@ export default function Abute() {
         <div className='grid grid-cols-4 gap-6 mt-16 pb-16'>
 
 
+          {teamMembers.map((teamMember, index) => (
+            <div key={index} className='cols-span-1 hover:scale-95'>
 
-
-          <div className='cols-span-1 hover:scale-95'>
-            <TeamMemmberCard
-              profile={hassanProfile}
-              email={"/"}
-              whatsApp={"/"}
-              websit={"/"}
-              name='Hassanullah Usmani'
-              positionTitle='LRTM full-stack developer'
-              quickInfo='Hassanullah Usmani is a skilled LRTM full-stack developer with expertise in creating robust and dynamic web applications. He combines technical proficiency with innovative problem-solving to deliver high-quality solutions.'
-            />
-          </div>
-
-
-          <div className='cols-span-1 hover:scale-95'>
-            <TeamMemmberCard
-              profile={nasibjanProfile}
-              email={"/"}
-              whatsApp={"/"}
-              websit={"/"}
-              name='Nasibullah Niazi'
-              positionTitle='Backend developer'
-              quickInfo='Nasibullah Niazi is a proficient backend developer with expertise in building and maintaining efficient server-side systems, focusing on database management, API development, and optimizing application performance.'
-            />
-          </div>
-
-
-          <div className='cols-span-1 hover:scale-95'>
-            <TeamMemmberCard
-              profile={profile}
-              email={"/"}
-              whatsApp={"/"}
-              websit={"/"}
-              name='Ahmadullah Saber'
-              positionTitle='Frontend developer'
-              quickInfo='Ahmadullah Saber is a talented frontend developer specializing in creating user-friendly, visually appealing, and responsive web interfaces.'
-            />
-          </div>
-
-
-          <div className='cols-span-1 hover:scale-95'>
-            <TeamMemmberCard
-              profile={mohmmadProfile}
-              email={"/"}
-              whatsApp={"/"}
-              websit={"/"}
-              name='Mohmmadajan Mohmmady'
-              positionTitle='IT manager'
-              quickInfo='Mohmmady is an accomplished IT Manager known for his expertise in overseeing and optimizing IT operations, ensuring seamless technology integration and innovation within organizations.'
-            />
-          </div>
+              <TeamMemmberCard
+                profile={hassanProfile}
+                email={teamMember.emailLink}
+                whatsApp={teamMember.whatsappLink}
+                websit={teamMember.webLink}
+                name={teamMember.fullName}
+                positionTitle={teamMember.position}
+                quickInfo={teamMember.info.slice(0,200)}
+              />
+            </div>
+          ))}
 
 
         </div>
@@ -99,19 +80,19 @@ export default function Abute() {
 
           <div className=' col-span-1 flex flex-col justify-center items-center'>
             <UsersIcon className='size-14 mb-3' />
-            <LandingCounter count={12} />
+            <LandingCounter count={teamMembersNumbers} />
             <div className=' text-base'>Team Mammbers</div>
           </div>
 
           <div className='col-span-1 flex flex-col justify-center items-center'>
             <ClipboardDocumentListIcon className='size-14 mb-3' />
-            <LandingCounter count={103} />
+            <LandingCounter count={articleNumbers} />
             <div className=' text-base'>Total Posts</div>
           </div>
 
           <div className='col-span-1 flex flex-col justify-center items-center'>
             <AcademicCapIcon className='size-14 mb-3' />
-            <LandingCounter count={1_403} />
+            <LandingCounter count={userNumbers} />
             <div className=' text-base'>Users</div>
           </div>
 

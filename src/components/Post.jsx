@@ -15,7 +15,7 @@ export default function Post(props) {
           <div className="line-clamp-1">{props.author}</div>
           <div className="text-nowrap">{props.date}</div>
         </div>
-        <Link to={props.link} className="flex justify-center items-center gap-1 text-sm">
+        <Link to={props.link} className="flex justify-center items-center gap-1 text-sm hover:text-green-500 hover:scale-105 transition-all">
           Study the article
           <ArrowRightCircleIcon className="size-5" />
         </Link>

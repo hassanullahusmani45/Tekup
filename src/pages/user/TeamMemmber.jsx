@@ -9,11 +9,30 @@ import { Autoplay } from 'swiper/modules'
 import 'swiper/css';
 import 'swiper/css/autoplay';
 
-import post1 from "../../assets/images/post1.webp"
-import post2 from "../../assets/images/post2.jpg"
 import post3 from "../../assets/images/post3.jpg"
+import { useEffect, useState } from 'react'
+import axios from '../../api/axios'
+import { useParams } from 'react-router-dom'
 
 export default function TeamMemmber() {
+  const params = useParams()
+  const [member, setMember] = useState('');
+  const [memberArticles, setMemberArticles] = useState([]);
+  useEffect(() => {
+    axios.get(`/member-information/${params.name}`)
+      .then(response => {
+        setMember(response.data);
+      });
+  }, [params.name]);
+
+  useEffect(() => {
+
+    axios.post('/member-articles', { 'id': member.id })
+      .then(response => {
+        setMemberArticles(response.data.memberArticles);
+      });
+
+  }, [member.id]);
   return (
     <Layout>
       <div className=''>
@@ -27,30 +46,24 @@ export default function TeamMemmber() {
               </span>
             </span>
             <div className='space-y-2 text-slate-300'>
-              <div className='text-lg font-medium my-6 text-white'>Hassan ullah usmani</div>
-              <div className='text-slate-100'>LRTM full-stack developer ❤</div>
-              <div className='text-sm'>
-                white three years experience as full stack developer by useing of in frontend React, Vue, TailwindCSS and backend Laravel, PHP language.
-              </div>
-              <div className='flex items-center gap-2 text-sm'><BuildingOffice2Icon className='size-5 text-white' />Entire Thinkers Technology</div>
-              <div className='flex items-center gap-2 text-sm'><EnvelopeIcon className='size-5 text-white' />hassanullahusmani45@gmail.com</div>
-              <div className='flex items-center gap-2 text-sm'><MapPinIcon className='size-5 text-white' />Kabul,Afghanistan</div>
+              <div className='text-lg font-medium my-6 text-white'>{member.fullName}</div>
+              <div className='text-slate-100'>{member.position} ❤</div>
+              <div className='text-sm'>{member.biography}</div>
+              <div className='flex items-center gap-2 text-sm'><BuildingOffice2Icon className='size-5 text-white' />{member.jobPlace}</div>
+              <div className='flex items-center gap-2 text-sm'><EnvelopeIcon className='size-5 text-white' />{member.emailLink}</div>
+              <div className='flex items-center gap-2 text-sm'><MapPinIcon className='size-5 text-white' />{member.address}</div>
             </div>
 
             <div className='text-lg font-medium my-6 text-white'>💪 My Skills</div>
-            <div className='text-sm font-serif text-slate-300'>
-              Laravel, PHP, JavaScript, React , Vue, Tailwind CSS, Bootstrap, HTML, CSS, Flex-box, CssGrid, MySQL, MongoDB, Git, and GitHub
-            </div>
+            <div className='text-sm font-serif text-slate-300'>{member.skills}</div>
 
           </div>
 
           <div className='col-span-5 rounded-xl  bg-slate-800'>
 
             <div className='p-8'>
-              <div className=' text-lg font-serif my-8'>Hi there! I’m Hassanullah Usmani 🖐</div>
-              <div className='text-base text-slate-300'>
-                I’m a Full-Stack Developer with over three years of experience in web development. I have worked as a back-end developer at Entire Thinkers Technology and am currently working as a Full-Stack Developer at the Ministry of Transport and Aviation in Afghanistan contry.
-              </div>
+              <div className=' text-lg font-serif my-8'>Hi there! I’m {member.fullName} 🖐</div>
+              <div className='text-base text-slate-300'>{member.info}</div>
             </div>
 
             <div className='p-3 rounded-lg'>
@@ -65,51 +78,19 @@ export default function TeamMemmber() {
                 }}
                 className="mySwiper"
               >
-                <SwiperSlide>
-                  <Post
-                    src={post1}
-                    author="Hassanullah Usmani"
-                    date="1403-9-21"
-                    link="/"
-                    className={"bg-slate-700"}
-                    title='What is TailwindCSS framwork?'
-                    desc='TailwindCSS is a utility-first CSS framework that provides pre-defined classes for fast and customizable styling directly in your HTML. It simplifies responsive design and speeds up development without writing custom CSS.'
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <Post
-                    src={post2}
-                    author="Hassanullah Usmani"
-                    date="1403-9-23"
-                    link="/"
-                    className={"bg-slate-700"}
-                    title='The best programming languages in 2025.'
-                    desc='Python and JavaScript continue to lead in 2025 due to their versatility, ease of use, and applications in AI, web development, and data science.'
-
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <Post
-                    src={post1}
-                    author="Hassanullah Usmani"
-                    date="1403-9-21"
-                    link="/"
-                    className={"bg-slate-700"}
-                    title='What is TailwindCSS framwork?'
-                    desc='TailwindCSS is a utility-first CSS framework that provides pre-defined classes for fast and customizable styling directly in your HTML. It simplifies responsive design and speeds up development without writing custom CSS.'
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <Post
-                    src={post3}
-                    author="Hassanullah Usmani"
-                    date="1403-10-3"
-                    link="/"
-                    className={"bg-slate-700"}
-                    title='Why is Python the favorite programming language of hackers?'
-                    desc='Python is a favorite among hackers due to its simplicity, versatility, and extensive library support. It enables quick development of scripts and tools for tasks like web scraping, network scanning, and password cracking. Libraries like Scapy, Socket, and PyCrypto make it ideal for penetration testing and cybersecurity.'
-                  />
-                </SwiperSlide>
+                {memberArticles.map((memberArticle, index) => (
+                  <SwiperSlide key={index}>
+                    <Post
+                      className={"bg-slate-700"}
+                      src={post3}
+                      author={memberArticle.author.fullName}
+                      date={memberArticle.created_at && (memberArticle.created_at).slice(0, 10)}
+                      link={`/show-article/${memberArticle.title}`}
+                      title={memberArticle.title}
+                      desc={memberArticle.shorInfo}
+                    />
+                  </SwiperSlide>
+                ))}
 
               </Swiper>
             </div>

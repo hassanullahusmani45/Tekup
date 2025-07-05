@@ -4,10 +4,43 @@ import logo from "../../assets/images/logo-white.svg";
 import hassanProfile from "../../assets/images/hassan.JPG";
 import Header from "../../components/Header";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import axios from '../../api/axios';
+import { ExclamationTriangleIcon } from "@heroicons/react/24/solid";
+import swal from "sweetalert";
 
 export default function Contact() {
 
     const currentYear = new Date().getFullYear();
+    const [fullName, setFullName] = useState();
+    const [email, setEmail] = useState();
+    const [message, setMessage] = useState();
+    const [error, setError] = useState();
+
+    const contectFormHandler = (event) => {
+        event.preventDefault();
+        const formData = new FormData();
+        formData.append("fullName", fullName);
+        formData.append("email", email);
+        formData.append("message", message);
+
+        axios.post("/save-contact", formData)
+            .then(response => {
+                setError("");
+                if (response.statusText=='Created') {
+                    setFullName("");
+                    setEmail("");
+                    setMessage("");
+                    swal({
+                        title: response.data.success,
+                        button:"ok",
+                        icon:"success"
+                    })
+                }
+            }).catch(error => {
+                setError(error.response.data.message);
+            });
+    }
 
     return (
         <>
@@ -21,12 +54,15 @@ export default function Contact() {
                 <div className=" grid grid-cols-2 gap-20 mt-10">
                     <div className="col-span-1 text-left bg-slate-800/80 p-8 mx-20 rounded-2xl shadow-xl">
                         <div className="text-xl font-bold text-center mb-4">Contact As</div>
-                        <form className="pt-6">
+                        <div>
+                            {error && <p className=" flex gap-2 items-center text-red-400"><ExclamationTriangleIcon className='size-5 text-red-500' /> {error}</p>}
+                        </div>
+                        <form className="pt-6" onSubmit={contectFormHandler}>
                             <div className="flex flex-col gap-4 items-center">
-                                <input type="text" placeholder="Full Name" className="font-base rounded-full shadow-md block w-full p-2.5 px-6 bg-slate-950/70 placeholder:text-gray-200 placeholder:text-sm placeholder:font-normal" />
-                                <input type="email" placeholder="Email" className="font-base rounded-full shadow-md block w-full p-2.5 px-6 bg-slate-950/70 placeholder:text-gray-200 placeholder:text-sm placeholder:font-normal" />
-                                <textarea placeholder="Message" className="font-base rounded-xl shadow-md block w-full p-2.5 px-6 bg-slate-950/70 placeholder:text-gray-200 placeholder:text-sm placeholder:font-normal" rows={11} />
-                                <button type="submit" className="w-fit mt-6 bg-gradient-to-r from-blue-900 to-blue-400 hover:bg-gradient-to-l px-16 py-2.5 rounded-full transition-all">Send</button>
+                                <input type="text" onChange={(event) => { setFullName(event.target.value) }} value={fullName} placeholder="Full Name" className="font-base rounded-full shadow-md block w-full p-2.5 px-6 bg-slate-950/70 placeholder:text-gray-200 placeholder:text-sm placeholder:font-normal" />
+                                <input type="email" onChange={(event) => { setEmail(event.target.value) }} value={email} placeholder="Email" className="font-base rounded-full shadow-md block w-full p-2.5 px-6 bg-slate-950/70 placeholder:text-gray-200 placeholder:text-sm placeholder:font-normal" />
+                                <textarea onChange={(event) => { setMessage(event.target.value) }} value={message} placeholder="Message" className="font-base rounded-xl shadow-md block w-full p-2.5 px-6 bg-slate-950/70 placeholder:text-gray-200 placeholder:text-sm placeholder:font-normal" rows={11} />
+                                <button onClick={() => setError("")} type="submit" className="w-fit mt-6 bg-gradient-to-r from-blue-900 to-blue-400 hover:bg-gradient-to-l px-16 py-2.5 rounded-full transition-all">Send</button>
                             </div>
                         </form>
                     </div>
@@ -49,12 +85,12 @@ export default function Contact() {
                             Laravel, PHP, JavaScript, React , Vue, Tailwind CSS, Bootstrap, HTML, CSS, Flex-box, CssGrid, MySQL, MongoDB, Git, GitHub, and more.
                         </p>
                         <div className="text-base font-semibold text-left mt-8">Contect Me</div>
-                        <p className="text-white/80 text-justify pt-4 leading-7">
+                        <div className="text-white/80 text-justify pt-4 leading-7">
                             <div className="flex items-center gap-2"><MapPinIcon className="size-5" />Kabul Tarafick square 3 street Afghanistan</div>
                             <div className="flex items-center gap-2"><EnvelopeIcon className="size-5" /> hassanullahusmani45@gmail.com</div>
                             <div className="flex items-center gap-2"><DevicePhoneMobileIcon className="size-5" /> +93 767 233 172</div>
                             <div className="flex items-center gap-2"><GlobeAltIcon className="size-5" /> https://www.entirethinkers.com</div>
-                        </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -74,7 +110,7 @@ export default function Contact() {
                 <div className="col-span-1 text-left">
                     <div className="flex items-center gap-1 my-5"><PaperClipIcon className="size-6" />Pages</div>
                     <div className="text-sm leading-[2rem]">
-                        <Link to={"/posts"} className="flex items-center gap-x-1 text-white/80"><CommandLineIcon className="size-5 text-white" />Posts</Link>
+                        <Link to={"/posts"} className="flex items-center gap-x-1 text-white/80"><CommandLineIcon className="size-5 text-white" />Article</Link>
                         <Link to={"/abute"} className="flex items-center gap-x-1 text-white/80"><ChatBubbleOvalLeftIcon className="size-5 text-white" />Abute As</Link>
                         <Link to={"/contact-as"} className="flex items-center gap-x-1 text-white/80"><LinkIcon className="size-5 text-white" />Contact As</Link>
                     </div>
@@ -90,7 +126,7 @@ export default function Contact() {
                 </div>
 
                 <div className=" col-span-4 text-center border-t border-slate-600 py-4 mt-6">
-                    Copyright &copy; {currentYear} Tekup Posts
+                    Copyright &copy; {currentYear} Tekup Articles
                 </div>
             </div>
         </>

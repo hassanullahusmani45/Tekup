@@ -24,7 +24,7 @@ export default function Input(props) {
         }
     }
     const [maininput, dispatch] = useReducer(inputReducer, {
-        value: props.value,
+        value: props.value || "",
         isValid: props.isValid,
         errorMessage: null,
     })

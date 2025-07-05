@@ -1,10 +1,7 @@
 import { AcademicCapIcon, ChevronLeftIcon, ChevronRightIcon, CircleStackIcon, ClipboardDocumentListIcon, InboxStackIcon, MagnifyingGlassIcon, ShieldCheckIcon, Square3Stack3DIcon, TrophyIcon, TvIcon, UsersIcon } from '@heroicons/react/24/outline';
 import Layout from '../../Layout/Layout';
 import LandingCounter from '../../components/LandingCounter';
-import profile from '../../assets/images/profile.jpg'
 import hassanProfile from '../../assets/images/hassan.JPG'
-import nasibjanProfile from '../../assets/images/nasibjan.jpg'
-import mohmmadProfile from '../../assets/images/mohmmad.jpg'
 
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -12,19 +9,105 @@ import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/autoplay';
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BoltIcon, SparklesIcon } from '@heroicons/react/24/solid';
 import Post from '../../components/Post';
 import post1 from "../../assets/images/post1.webp"
-import post2 from "../../assets/images/post2.jpg"
 import post3 from "../../assets/images/post3.jpg"
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import TeamMemmberCard from '../../components/TeamMemmberCard';
+import axios from '../../api/axios';
 
 export default function Index() {
-
+  const [categoryCounts, setCategoryCounts] = useState({
+    frontend: 0,
+    backend: 0,
+    artificialIntelligence: 0,
+    security: 0
+  });
+  const navigat = useNavigate()
   const swiperRef = useRef(null);
+  const [articleNumbers, setArticleNumbers] = useState(0);
+  const [teamMembersNumbers, setTeamMembersNumbers] = useState(0);
+  const [userNumbers, setUserNumbers] = useState(0);
+  const [teamMembers, setTeamMembers] = useState([]);
+  const [allArticles, setAllArticles] = useState([]);
+  const [allSearchArticles, setAllSearchArticles] = useState([]);
+  const [searchArticle, setSearchArticle] = useState([]);
+  const [newArticles, setNewArticles] = useState([]);
+  const [onFocus, setOnFocus] = useState(false);
+  const [searchInputValue, setSearchInputValue] = useState('');
 
+  const searchHandler = (title) => {
+    navigat(`/show-article/${encodeURIComponent(title)}`)
+  }
+  const searchInputOnchangeHandler = (event) => {
+    const inputValue = event.target.value.toLowerCase();
+    setSearchInputValue(event.target.value);
+    const filteredArticle = [...allSearchArticles].filter(article => article.title.toLowerCase().includes(inputValue));
+
+    if (event.target.value.trim().length) {
+      setSearchArticle(filteredArticle);
+    } else {
+      setSearchArticle(allArticles);
+    }
+  }
+
+  useEffect(() => {
+
+    axios.get('/all-articles-for-serch')
+      .then(response => {
+        setAllSearchArticles(response.data.allSeachArticle);
+        setSearchArticle(response.data.allSeachArticle);
+      });
+
+    axios.get('/leading-conter')
+      .then(response => {
+        setArticleNumbers(response.data.articleNumbers);
+        setTeamMembersNumbers(response.data.teamMembersNumbers);
+        setUserNumbers(response.data.userNumbers);
+      });
+
+    axios.get('/team-members')
+      .then(response => {
+        setTeamMembers(response.data.teamMembers)
+      });
+
+    axios.get('/posts')
+      .then(response => {
+        setAllArticles(response.data.allArticles);
+      });
+
+    axios.get('/new-articles')
+      .then(response => {
+        setNewArticles(response.data.newArticles);
+      })
+  }, []);
+
+  useEffect(() => {
+    const counts = allSearchArticles.reduce((acc, article) => {
+      switch (article.category) {
+        case 1:
+          acc.frontend += 1;
+          break;
+        case 2:
+          acc.backend += 1;
+          break;
+        case 3:
+          acc.artificialIntelligence += 1;
+          break;
+        case 4:
+          acc.security += 1;
+          break;
+        default:
+          break;
+      }
+      return acc;
+    }, { frontend: 0, backend: 0, artificialIntelligence: 0, security: 0 });
+
+    setCategoryCounts(counts);
+  }, [allSearchArticles]);
+  
   const handleNext = () => {
     if (swiperRef.current) {
       swiperRef.current.slideNext();
@@ -45,31 +128,38 @@ export default function Index() {
 
           <div className='text-3xl font-bold font-serif'>Tekup The Best Place For Lernig Articles</div>
 
-          <div className="relative bg-slate-800 rounded-full overflow-hidden mb-20 mt-14 w-4/6">
-            <input type="text" placeholder="Search posts here..."
-              className="block border-none outline-none bg-slate-800 w-full py-5 ps-8 pe-10 text-base  placeholder:text-slate-300 placeholder:text-sm"
+          <div className={`relative bg-slate-800 ${onFocus ? 'rounded-t-2xl' : 'rounded-full'} mb-20 mt-14 w-4/6`}>
+            <input onFocus={() => setOnFocus(true)} onChange={searchInputOnchangeHandler} value={searchInputValue} type="text" placeholder="Search posts here..."
+              className={`block border-none outline-none bg-slate-800 w-full py-5 ps-8 pe-10 text-base  placeholder:text-slate-300 placeholder:text-sm ${onFocus ? 'rounded-t-2xl' : 'rounded-full'}`}
               required autoComplete='off' />
-            <button type="submit"
+            <button onClick={() => setOnFocus(false)} type="submit"
               className="absolute end-3 bottom-2 bg-teal-700 hover:bg-teal-900 font-medium rounded-full text-sm p-3">
               <MagnifyingGlassIcon className='size-6' />
             </button>
+            <div className={`absolute inset-0 top-16 h-40 w-full bg-slate-700/95 rounded-b-2xl py-1 overflow-hidden transition-all ${onFocus ? 'opacity-100 pointer-events-auto' : 'hidden'}`} >
+              <div>
+                {searchArticle.map((article, index) => (
+                  <div onClick={() => searchHandler(article.title)} key={index} className={`block px-8 py-3 cursor-pointer hover:bg-slate-600 pointer-events-auto`}>{article.title}</div>
+                ))}
+              </div>
+            </div>
           </div>
 
 
           <div className='grid grid-cols-3 w-1/2'>
             <div className=' col-span-1 flex flex-col justify-center items-center'>
               <UsersIcon className='size-14 mb-3' />
-              <LandingCounter count={12} />
+              <LandingCounter count={teamMembersNumbers} />
               <div className=' text-base'>Team Mammbers</div>
             </div>
             <div className='col-span-1 flex flex-col justify-center items-center'>
               <ClipboardDocumentListIcon className='size-14 mb-3' />
-              <LandingCounter count={103} />
-              <div className=' text-base'>Total Posts</div>
+              <LandingCounter count={articleNumbers} />
+              <div className=' text-base'>Total Articles</div>
             </div>
             <div className='col-span-1 flex flex-col justify-center items-center'>
               <AcademicCapIcon className='size-14 mb-3' />
-              <LandingCounter count={403} />
+              <LandingCounter count={userNumbers} />
               <div className=' text-base'>Users</div>
             </div>
           </div>
@@ -95,50 +185,19 @@ export default function Index() {
               }}
               className="mySwiper"
             >
-              <SwiperSlide>
-                <TeamMemmberCard
-                  profile={hassanProfile}
-                  email={"/"}
-                  whatsApp={"/"}
-                  websit={"/"}
-                  name='Hassanullah Usmani'
-                  positionTitle='LRTM full-stack developer'
-                  quickInfo='Hassanullah Usmani is a skilled LRTM full-stack developer with expertise in creating robust and dynamic web applications. He combines technical proficiency with innovative problem-solving to deliver high-quality solutions.'
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <TeamMemmberCard
-                  profile={nasibjanProfile}
-                  email={"/"}
-                  whatsApp={"/"}
-                  websit={"/"}
-                  name='Nasibullah Niazi'
-                  positionTitle='Backend developer'
-                  quickInfo='Nasibullah Niazi is a proficient backend developer with expertise in building and maintaining efficient server-side systems, focusing on database management, API development, and optimizing application performance.'
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <TeamMemmberCard
-                  profile={profile}
-                  email={"/"}
-                  whatsApp={"/"}
-                  websit={"/"}
-                  name='Ahmadullah Saber'
-                  positionTitle='Frontend developer'
-                  quickInfo='Ahmadullah Saber is a talented frontend developer specializing in creating user-friendly, visually appealing, and responsive web interfaces.'
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <TeamMemmberCard
-                  profile={mohmmadProfile}
-                  email={"/"}
-                  whatsApp={"/"}
-                  websit={"/"}
-                  name='Mohmmadajan Mohmmady'
-                  positionTitle='IT manager'
-                  quickInfo='Mohmmady is an accomplished IT Manager known for his expertise in overseeing and optimizing IT operations, ensuring seamless technology integration and innovation within organizations.'
-                />
-              </SwiperSlide>
+              {teamMembers.map((teamMember, index) => (
+                <SwiperSlide key={index}>
+                  <TeamMemmberCard
+                    profile={hassanProfile}
+                    email={teamMember.emailLink}
+                    whatsApp={teamMember.whatsappLink}
+                    websit={teamMember.webLink}
+                    name={teamMember.fullName}
+                    positionTitle={teamMember.position}
+                    quickInfo={teamMember.info}
+                  />
+                </SwiperSlide>
+              ))}
 
             </Swiper>
           </div>
@@ -148,154 +207,34 @@ export default function Index() {
 
 
 
-          {/* start all posts */}
-          <div className='mt-28 text-start font-semibold text-xl text-fuchsia-500'><InboxStackIcon className='inline size-8 me-2 text-violet-500' />All posts</div>
+          {/* start all articles */}
+          <div className='mt-28 text-start font-semibold text-xl text-fuchsia-500'><InboxStackIcon className='inline size-8 me-2 text-violet-500' />All Articles</div>
           <div className='w-1/4 mt-2 border-t-2 border-dotted border-fuchsia-300 '></div>
 
           <div className='grid grid-cols-4 gap-4 my-10'>
 
-            <div className='col-span-1'>
-              <Post
-                src={post1}
-                author="Nasibullah Nizai"
-                date="1403-9-21"
-                link="/"
-                title='What is TailwindCSS framwork?'
-                desc='TailwindCSS is a utility-first CSS framework that provides pre-defined classes for fast and customizable styling directly in your HTML. It simplifies responsive design and speeds up development without writing custom CSS.'
-              />
-            </div>
-
-            <div className='col-span-1'>
-              <Post
-                src={post2}
-                author="Hassanullah Najimi"
-                date="1403-9-23"
-                link="/"
-                title='The best programming languages in 2025.'
-                desc='Python and JavaScript continue to lead in 2025 due to their versatility, ease of use, and applications in AI, web development, and data science.'
-              />
-            </div>
-
-            <div className='col-span-1'>
-              <Post
-                src={post3}
-                author="Ahmadullah Sabir"
-                date="1403-10-3"
-                link="/"
-                title='Why is Python the favorite programming language of hackers?'
-                desc='Python is a favorite among hackers due to its simplicity, versatility, and extensive library support. It enables quick development of scripts and tools for tasks like web scraping, network scanning, and password cracking. Libraries like Scapy, Socket, and PyCrypto make it ideal for penetration testing and cybersecurity.'
-              />
-            </div>
-
-            <div className='col-span-1'>
-              <Post
-                src={post2}
-                author="Hassanullah Najimi"
-                date="1403-9-23"
-                link="/"
-                title='The best programming languages in 2025.'
-                desc='Python and JavaScript continue to lead in 2025 due to their versatility, ease of use, and applications in AI, web development, and data science.'
-              />
-            </div>
-
-
-            <div className='col-span-1'>
-              <Post
-                src={post3}
-                author="Hassanullah Usmani"
-                date="1403-10-3"
-                link="/"
-                title='Why is Python the favorite programming language of hackers?'
-                desc='Python is a favorite among hackers due to its simplicity, versatility, and extensive library support. It enables quick development of scripts and tools for tasks like web scraping, network scanning, and password cracking. Libraries like Scapy, Socket, and PyCrypto make it ideal for penetration testing and cybersecurity.'
-              />
-            </div>
-
-            <div className='col-span-1'>
-              <Post
-                src={post1}
-                author="Mohmmadajan Mohmmady"
-                date="1403-9-21"
-                link="/"
-                title='What is TailwindCSS framwork?'
-                desc='TailwindCSS is a utility-first CSS framework that provides pre-defined classes for fast and customizable styling directly in your HTML. It simplifies responsive design and speeds up development without writing custom CSS.'
-              />
-            </div>
-
-            <div className='col-span-1'>
-              <Post
-                src={post2}
-                author="Hassanullah Najimi"
-                date="1403-9-23"
-                link="/"
-                title='The best programming languages in 2025.'
-                desc='Python and JavaScript continue to lead in 2025 due to their versatility, ease of use, and applications in AI, web development, and data science.'
-              />
-            </div>
-
-            <div className='col-span-1'>
-              <Post
-                src={post3}
-                author="Ahmadullah Sabir"
-                date="1403-10-3"
-                link="/"
-                title='Why is Python the favorite programming language of hackers?'
-                desc='Python is a favorite among hackers due to its simplicity, versatility, and extensive library support. It enables quick development of scripts and tools for tasks like web scraping, network scanning, and password cracking. Libraries like Scapy, Socket, and PyCrypto make it ideal for penetration testing and cybersecurity.'
-              />
-            </div>
-
-            <div className='col-span-1'>
-              <Post
-                src={post2}
-                author="Hassanullah Najimi"
-                date="1403-9-23"
-                link="/"
-                title='The best programming languages in 2025.'
-                desc='Python and JavaScript continue to lead in 2025 due to their versatility, ease of use, and applications in AI, web development, and data science.'
-              />
-            </div>
-
-            <div className='col-span-1'>
-              <Post
-                src={post3}
-                author="Ahmadullah Sabir"
-                date="1403-10-3"
-                link="/"
-                title='Why is Python the favorite programming language of hackers?'
-                desc='Python is a favorite among hackers due to its simplicity, versatility, and extensive library support. It enables quick development of scripts and tools for tasks like web scraping, network scanning, and password cracking. Libraries like Scapy, Socket, and PyCrypto make it ideal for penetration testing and cybersecurity.'
-              />
-            </div>
-
-            <div className='col-span-1'>
-              <Post
-                src={post2}
-                author="Hassanullah Najimi"
-                date="1403-9-23"
-                link="/"
-                title='The best programming languages in 2025.'
-                desc='Python and JavaScript continue to lead in 2025 due to their versatility, ease of use, and applications in AI, web development, and data science.'
-              />
-            </div>
-
-            <div className='col-span-1'>
-              <Post
-                src={post3}
-                author="Ahmadullah Sabir"
-                date="1403-10-3"
-                link="/"
-                title='Why is Python the favorite programming language of hackers?'
-                desc='Python is a favorite among hackers due to its simplicity, versatility, and extensive library support. It enables quick development of scripts and tools for tasks like web scraping, network scanning, and password cracking. Libraries like Scapy, Socket, and PyCrypto make it ideal for penetration testing and cybersecurity.'
-              />
-            </div>
+            {allArticles.map((article, index) => (
+              <div key={index} className='col-span-1'>
+                <Post
+                  src={post1}
+                  author={article.author.fullName}
+                  date={article.created_at && (article.created_at).slice(0, 10)}
+                  link={`/show-article/${article.title}`}
+                  title={article.title}
+                  desc={article.shorInfo}
+                />
+              </div>
+            ))}
 
           </div>
-          {/* end all posts */}
+          {/* end all articles */}
 
 
 
 
 
           {/* start category part  */}
-          <div className='mt-28 text-start font-semibold text-xl text-sky-500'><Square3Stack3DIcon className='inline size-8 me-2 text-blue-500' />Numbers of the categories posts</div>
+          <div className='mt-28 text-start font-semibold text-xl text-sky-500'><Square3Stack3DIcon className='inline size-8 me-2 text-blue-500' />Numbers of the categories articles</div>
           <div className='w-1/3 mt-2 border-t-2 border-dotted border-sky-300'></div>
 
 
@@ -303,25 +242,25 @@ export default function Index() {
 
             <Link to={"/posts"} className='flex flex-col justify-center items-center py-5 bg-gradient-to-r from-[#3564ff] to-[#62f229] overflow-hidden rounded-xl'>
               <ShieldCheckIcon className='size-12 mb-3' />
-              <div className=' font-medium'>7</div>
+              <div className=' font-medium'>{categoryCounts.security}</div>
               <div className='text-base font-semibold'>Security</div>
             </Link>
 
             <Link to={"/posts"} className='flex flex-col justify-center items-center py-5 bg-gradient-to-r from-[#5bf0ca] to-[#0b75ee] overflow-hidden rounded-xl'>
               <TvIcon className='size-12 mb-3' />
-              <div className=' font-medium'>42</div>
+              <div className=' font-medium'>{categoryCounts.frontend}</div>
               <div className='text-base font-semibold'>Frontend</div>
             </Link>
 
             <Link to={"/posts"} className='flex flex-col justify-center items-center py-5 bg-gradient-to-r from-[#9e4bc5] to-[#60d6f3] overflow-hidden rounded-xl'>
               <CircleStackIcon className='size-12 mb-3' />
-              <div className=' font-medium'>14</div>
+              <div className=' font-medium'>{categoryCounts.backend}</div>
               <div className='text-base font-semibold'>Backend</div>
             </Link>
 
             <Link to={"/posts"} className='flex flex-col justify-center items-center py-5 bg-gradient-to-r from-[#f1ce59] to-[#f04d75] overflow-hidden rounded-xl'>
               <TrophyIcon className='size-12 mb-3' />
-              <div className='font-medium'>13</div>
+              <div className='font-medium'>{categoryCounts.artificialIntelligence}</div>
               <div className='text-base font-semibold'>Artificial intelligence</div>
             </Link>
 
@@ -332,10 +271,10 @@ export default function Index() {
 
 
 
-          {/* start new posts part  */}
+          {/* start new articles part  */}
           <div className=' flex justify-between items-center mt-28'>
             <div className='w-full'>
-              <div className='text-start font-semibold text-xl text-emerald-500'><BoltIcon className='inline size-8 me-2 text-green-500' /> New Posts</div>
+              <div className='text-start font-semibold text-xl text-emerald-500'><BoltIcon className='inline size-8 me-2 text-green-500' /> New Articles</div>
               <div className='w-1/4 mt-2 border-t-2 border-dotted border-emerald-300 '></div>
             </div>
 
@@ -353,69 +292,27 @@ export default function Index() {
               className="mySwiper"
               onSwiper={(swiper) => (swiperRef.current = swiper)}
             >
-              <SwiperSlide>
-                <Post
-                  src={post3}
-                  author="Ahmadullah Sabir"
-                  date="1403-10-3"
-                  link="/"
-                  title='Why is Python the favorite programming language of hackers?'
-                  desc='Python is a favorite among hackers due to its simplicity, versatility, and extensive library support. It enables quick development of scripts and tools for tasks like web scraping, network scanning, and password cracking. Libraries like Scapy, Socket, and PyCrypto make it ideal for penetration testing and cybersecurity.'
-                />
-              </SwiperSlide>
-
-              <SwiperSlide>
-                <Post
-                  src={post2}
-                  author="Hassanullah Najimi"
-                  date="1403-9-23"
-                  link="/"
-                  title='The best programming languages in 2025.'
-                  desc='Python and JavaScript continue to lead in 2025 due to their versatility, ease of use, and applications in AI, web development, and data science.'
-                />
-              </SwiperSlide>
-
-              <SwiperSlide>
-                <Post
-                  src={post1}
-                  author="Mohmmadajan Mohmmady"
-                  date="1403-9-21"
-                  link="/"
-                  title='What is TailwindCSS framwork?'
-                  desc='TailwindCSS is a utility-first CSS framework that provides pre-defined classes for fast and customizable styling directly in your HTML. It simplifies responsive design and speeds up development without writing custom CSS.'
-                />
-              </SwiperSlide>
-
-              <SwiperSlide>
-                <Post
-                  src={post3}
-                  author="Ahmadullah Sabir"
-                  date="1403-10-3"
-                  link="/"
-                  title='Why is Python the favorite programming language of hackers?'
-                  desc='Python is a favorite among hackers due to its simplicity, versatility, and extensive library support. It enables quick development of scripts and tools for tasks like web scraping, network scanning, and password cracking. Libraries like Scapy, Socket, and PyCrypto make it ideal for penetration testing and cybersecurity.'
-                />
-              </SwiperSlide>
-
-              <SwiperSlide>
-                <Post
-                  src={post2}
-                  author="Hassanullah Najimi"
-                  date="1403-9-23"
-                  link="/"
-                  title='The best programming languages in 2025.'
-                  desc='Python and JavaScript continue to lead in 2025 due to their versatility, ease of use, and applications in AI, web development, and data science.'
-                />
-              </SwiperSlide>
+              {newArticles.map((newArticle, index) => (
+                <SwiperSlide key={index}>
+                  <Post
+                    src={post3}
+                    author={newArticle.author.fullName}
+                    date={newArticle.created_at && (newArticle.created_at).slice(0, 10)}
+                    link={`/show-article/${newArticle.title}`}
+                    title={newArticle.title}
+                    desc={newArticle.shorInfo}
+                  />
+                </SwiperSlide>
+              ))}
 
             </Swiper>
           </div>
-          {/* end new posts part  */}
+          {/* end new articles part  */}
 
 
 
 
-          {/* start Discription abute site posts */}
+          {/* start Discription abute site articles */}
           <div className='mt-28 text-center font-semibold text-2xl text-teal-400'>Why we chose Tekup web sit</div>
           <div className=' w-1/3 mx-auto mt-2 border-t-2 border-dotted border-teal-500 ' ></div>
 
@@ -434,7 +331,7 @@ export default function Index() {
             Community Engagement: Tekup fosters a vibrant community, enabling users to connect, collaborate, and grow together.
             Tekup is more than just a website; it is a gateway to achieving your objectives with ease. Its innovative approach and dedication to quality make it the perfect partner for modern digital needs. Whether you are a student, developer, or entrepreneur, Tekup is designed to empower you every step of the way.
           </div>
-          {/* end Discription abute site posts */}
+          {/* end Discription abute site articeles */}
 
 
         </main>
